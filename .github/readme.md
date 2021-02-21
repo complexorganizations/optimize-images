@@ -1,6 +1,6 @@
 ### Optimize Images
 
-This is a basic script that, you can use to minify images and cleanup some images.
+Simple small application that will minfy & cleanup images.
 
 ---
 ### Features
