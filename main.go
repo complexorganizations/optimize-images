@@ -20,8 +20,8 @@ func main() {
 }
 
 func imageformatChoice() {
-	fileExtension := filepath.Ext(imageFilePath)
-	switch fileExtension {
+	// fileExtension := filepath.Ext(imageFilePath)
+	switch filepath.Ext(imageFilePath) {
 	case ".jpeg":
 		jpegImage()
 	case ".jpg":
