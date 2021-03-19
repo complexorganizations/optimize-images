@@ -11,9 +11,7 @@ import (
 	"path/filepath"
 )
 
-var (
-	imageFilePath = os.Args[1]
-)
+var imageFilePath = os.Args[1]
 
 func main() {
 	imageformatChoice()
