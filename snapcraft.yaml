@@ -1,0 +1,16 @@
+name: optimize-images
+version: git
+base: core18
+grade: stable
+confinement: strict
+summary: Optimize Images
+description: Optimize-images cleans up your images without losing quality
+parts:
+  optimize-images:
+    plugin: go
+    go-importpath: github.com/complexorganizations/optimize-images
+    source: .
+    source-type: git
+apps:
+  optimize-images:
+    command: bin/optimize-images
