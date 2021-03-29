@@ -21,14 +21,20 @@ func init() {
 }
 
 func main() {
-	if systemPath == "/" {
-		//
-	}
 	imageformatChoice()
 }
 
+func formatAllImages() {
+	if systemPath == "/" {
+		filepath.Walk(systemPath, func(path string, info os.FileInfo, err error) error {
+			//
+			return nil
+		})
+	}
+}
+
 func imageformatChoice() {
-	switch filepath.Ext(os.Args[1]) {
+	switch filepath.Ext(systemPath) {
 	case ".jpeg", ".jpg":
 		jpegImage()
 	case ".png":
@@ -41,7 +47,7 @@ func imageformatChoice() {
 }
 
 func jpegImage() {
-	file, err := os.Open(os.Args[1])
+	file, err := os.Open(systemPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -50,7 +56,7 @@ func jpegImage() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	outfile, err := os.Create(os.Args[1])
+	outfile, err := os.Create(systemPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -62,7 +68,7 @@ func jpegImage() {
 }
 
 func pngImage() {
-	file, err := os.Open(os.Args[1])
+	file, err := os.Open(systemPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -71,7 +77,7 @@ func pngImage() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	outfile, err := os.Create(os.Args[1])
+	outfile, err := os.Create(systemPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -83,7 +89,7 @@ func pngImage() {
 }
 
 func gifImage() {
-	file, err := os.Open(os.Args[1])
+	file, err := os.Open(systemPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -92,7 +98,7 @@ func gifImage() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	outfile, err := os.Create(os.Args[1])
+	outfile, err := os.Create(systemPath)
 	if err != nil {
 		log.Fatal(err)
 	}
