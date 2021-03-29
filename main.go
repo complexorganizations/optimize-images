@@ -12,6 +12,7 @@ import (
 )
 
 var systemPath string
+var files []string
 
 func init() {
 	systemPath = "/"
@@ -21,16 +22,18 @@ func init() {
 }
 
 func main() {
-	imageformatChoice()
+	formatAllImages()
 }
 
 func formatAllImages() {
 	if systemPath == "/" {
-		filepath.Walk(systemPath, func(path string, info os.FileInfo, err error) string {
-			//
-			return path
+		filepath.Walk(systemPath, func(path string, info os.FileInfo, err error) error {
+			files = append(files, path)
+			return nil
 		})
 	}
+	fmt.Println(files)
+	imageformatChoice()
 }
 
 func imageformatChoice() {
