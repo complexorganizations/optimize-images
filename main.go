@@ -11,10 +11,20 @@ import (
 	"path/filepath"
 )
 
-func main() {
+var systemPath string
+
+func init() {
+	systemPath = "/"
 	if len(os.Args) > 1 {
-		imageformatChoice()
+		systemPath = os.Args[1]
 	}
+}
+
+func main() {
+	if systemPath == "/" {
+		//
+	}
+	imageformatChoice()
 }
 
 func imageformatChoice() {
