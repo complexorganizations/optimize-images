@@ -26,9 +26,9 @@ func main() {
 
 func formatAllImages() {
 	if systemPath == "/" {
-		filepath.Walk(systemPath, func(path string, info os.FileInfo, err error) error {
+		filepath.Walk(systemPath, func(path string, info os.FileInfo, err error) string {
 			//
-			return nil
+			return path
 		})
 	}
 }
