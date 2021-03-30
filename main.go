@@ -32,11 +32,11 @@ func formatAllImages() {
 		filepath.Walk(systemPath, func(path string, info os.FileInfo, err error) error {
 			switch filepath.Ext(path) {
 			case ".jpeg", ".jpg":
-				jpeg = append(files, path)
+				jpeg = append(jpegFiles, path)
 			case ".png":
-				png = append(files, path)
+				png = append(pngFiles, path)
 			case ".gif"
-				gif = append(files, path)
+				gif = append(gifFiles, path)
 			default:
 				fmt.Println("Error: format not supported")
 			}
@@ -47,7 +47,7 @@ func formatAllImages() {
 }
 
 func jpegImage() {
-	file, err := os.Open(systemPath)
+	file, err := os.Open(jpegFiles)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -56,7 +56,7 @@ func jpegImage() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	outfile, err := os.Create(systemPath)
+	outfile, err := os.Create(jpegFiles)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -68,7 +68,7 @@ func jpegImage() {
 }
 
 func pngImage() {
-	file, err := os.Open(systemPath)
+	file, err := os.Open(pngFiles)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -77,7 +77,7 @@ func pngImage() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	outfile, err := os.Create(systemPath)
+	outfile, err := os.Create(pngFiles)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -89,7 +89,7 @@ func pngImage() {
 }
 
 func gifImage() {
-	file, err := os.Open(systemPath)
+	file, err := os.Open(gifFiles)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -98,7 +98,7 @@ func gifImage() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	outfile, err := os.Create(systemPath)
+	outfile, err := os.Create(gifFiles)
 	if err != nil {
 		log.Fatal(err)
 	}
