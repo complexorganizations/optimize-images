@@ -14,13 +14,13 @@ import (
 var imageLocation string
 
 func init() {
-	imageLocation = os.Args[1]
+	if len(os.Args) > 1 {
+		imageLocation = os.Args[1]
+	}
 }
 
 func main() {
-	if len(os.Args) > 1 {
-		imageformatChoice()
-	}
+	imageformatChoice()
 }
 
 func imageformatChoice() {
