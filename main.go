@@ -12,7 +12,9 @@ import (
 )
 
 var systemPath string
-var files []string
+var jpeg []string
+var png []string
+var gif []string
 
 func init() {
 	systemPath = "/"
@@ -29,33 +31,19 @@ func formatAllImages() {
 	if systemPath == "/" {
 		filepath.Walk(systemPath, func(path string, info os.FileInfo, err error) error {
 			switch filepath.Ext(path) {
-			case ".jpeg", ".jpg", ".png", ".gif":
-				files = append(files, path)
+			case ".jpeg", ".jpg":
+				jpeg = append(files, path)
+			case ".png":
+				png = append(files, path)
+			case ".gif"
+				gif = append(files, path)
 			default:
 				fmt.Println("Error: format not supported")
 			}
 			return nil
 		})
 	}
-
-	fmt.Println(files)
 	imageformatChoice()
-}
-
-func imageformatChoice() {
-	if systemPath == "/" {
-		systemPath = files
-	}
-	switch filepath.Ext(systemPath) {
-	case ".jpeg", ".jpg":
-		jpegImage()
-	case ".png":
-		pngImage()
-	case ".gif":
-		gifImage()
-	default:
-		fmt.Println("Error: Image format not supported")
-	}
 }
 
 func jpegImage() {
