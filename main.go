@@ -11,6 +11,12 @@ import (
 	"path/filepath"
 )
 
+var imageLocation string
+
+func init() {
+	imageLocation = os.Args[1]
+}
+
 func main() {
 	if len(os.Args) > 1 {
 		imageformatChoice()
@@ -18,7 +24,7 @@ func main() {
 }
 
 func imageformatChoice() {
-	switch filepath.Ext(os.Args[1]) {
+	switch filepath.Ext(imageLocation) {
 	case ".jpeg", ".jpg":
 		jpegImage()
 	case ".png":
@@ -31,7 +37,7 @@ func imageformatChoice() {
 }
 
 func jpegImage() {
-	file, err := os.Open(os.Args[1])
+	file, err := os.Open(imageLocation)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -40,7 +46,7 @@ func jpegImage() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	outfile, err := os.Create(os.Args[1])
+	outfile, err := os.Create(imageLocation)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -52,7 +58,7 @@ func jpegImage() {
 }
 
 func pngImage() {
-	file, err := os.Open(os.Args[1])
+	file, err := os.Open(imageLocation)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -61,7 +67,7 @@ func pngImage() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	outfile, err := os.Create(os.Args[1])
+	outfile, err := os.Create(imageLocation)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -73,7 +79,7 @@ func pngImage() {
 }
 
 func gifImage() {
-	file, err := os.Open(os.Args[1])
+	file, err := os.Open(imageLocation)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -82,7 +88,7 @@ func gifImage() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	outfile, err := os.Create(os.Args[1])
+	outfile, err := os.Create(imageLocation)
 	if err != nil {
 		log.Fatal(err)
 	}
