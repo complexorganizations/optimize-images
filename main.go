@@ -12,7 +12,7 @@ import (
 )
 
 var systemPath string
-var files []string
+var files string
 
 func init() {
 	systemPath = "/"
