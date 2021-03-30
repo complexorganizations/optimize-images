@@ -37,6 +37,9 @@ func formatAllImages() {
 }
 
 func imageformatChoice() {
+	if systemPath == "/" {
+		systemPath = files
+	}
 	switch filepath.Ext(systemPath) {
 	case ".jpeg", ".jpg":
 		jpegImage()
