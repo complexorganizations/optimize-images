@@ -29,13 +29,15 @@ func formatAllImages() {
 	if systemPath == "/" {
 		filepath.Walk(systemPath, func(path string, info os.FileInfo, err error) error {
 			switch filepath.Ext(path) {
-				case ".jpeg", ".jpg" , ".png" , ".gif" {
-					files = append(files, path)
-				}
+			case ".jpeg", ".jpg", ".png", ".gif":
+				files = append(files, path)
+			default:
+				fmt.Println("Error: format not supported")
 			}
 			return nil
 		})
 	}
+
 	fmt.Println(files)
 	imageformatChoice()
 }
