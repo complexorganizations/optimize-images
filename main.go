@@ -28,7 +28,9 @@ func main() {
 func formatAllImages() {
 	if systemPath == "/" {
 		filepath.Walk(systemPath, func(path string, info os.FileInfo, err error) error {
-			files = append(files, path)
+			if filepath.Ext(path) == ".jpeg", ".jpg", ".png", ".gif" {
+				files = append(files, path)
+			}
 			return nil
 		})
 	}
