@@ -14,29 +14,49 @@ import (
 var imageLocation string
 
 func init() {
+	imageLocation = "/"
 	if len(os.Args) > 1 {
 		imageLocation = os.Args[1]
 	}
 }
 
 func main() {
+	formatAllImages()
 	imageformatChoice()
+}
+
+func formatAllImages() {
+	if imageLocation == "/" {
+		filepath.Walk(imageLocation, func(path string, info os.FileInfo, err error) error {
+			switch filepath.Ext(path) {
+			case ".jpeg", ".jpg":
+				jpegImage(path)
+			case ".png":
+				pngImage(path)
+			case ".gif":
+				gifImage(path)
+			default:
+				//
+			}
+			return nil
+		})
+	}
 }
 
 func imageformatChoice() {
 	switch filepath.Ext(imageLocation) {
 	case ".jpeg", ".jpg":
-		jpegImage()
+		jpegImage(imageLocation)
 	case ".png":
-		pngImage()
+		pngImage(imageLocation)
 	case ".gif":
-		gifImage()
+		gifImage(imageLocation)
 	default:
 		fmt.Println("Error: Image format not supported")
 	}
 }
 
-func jpegImage() {
+func jpegImage(imageLocation string) {
 	file, err := os.Open(imageLocation)
 	if err != nil {
 		log.Fatal(err)
@@ -57,7 +77,7 @@ func jpegImage() {
 	}
 }
 
-func pngImage() {
+func pngImage(imageLocation string) {
 	file, err := os.Open(imageLocation)
 	if err != nil {
 		log.Fatal(err)
@@ -78,7 +98,7 @@ func pngImage() {
 	}
 }
 
-func gifImage() {
+func gifImage(imageLocation string) {
 	file, err := os.Open(imageLocation)
 	if err != nil {
 		log.Fatal(err)
