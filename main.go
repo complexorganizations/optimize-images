@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"image"
-	"image/gif"
 	"image/jpeg"
 	"image/png"
 	"log"
@@ -35,8 +34,6 @@ func formatAllImages() {
 			jpegImage(path)
 		case ".png":
 			pngImage(path)
-		case ".gif":
-			gifImage(path)
 		default:
 			fmt.Println("Error:", imageLocation)
 		}
@@ -50,8 +47,6 @@ func imageformatChoice() {
 		jpegImage(imageLocation)
 	case ".png":
 		pngImage(imageLocation)
-	case ".gif":
-		gifImage(imageLocation)
 	default:
 		fmt.Println("Error:", imageLocation)
 	}
@@ -95,28 +90,6 @@ func pngImage(imageLocation string) {
 	}
 	defer outfile.Close()
 	png.Encode(outfile, img)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("Enhancing:", imageLocation)
-}
-
-func gifImage(imageLocation string) {
-	file, err := os.Open(imageLocation)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
-	img, _, err := image.Decode(file)
-	if err != nil {
-		log.Fatal(err)
-	}
-	outfile, err := os.Create(imageLocation)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer outfile.Close()
-	gif.Encode(outfile, img, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
