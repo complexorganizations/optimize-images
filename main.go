@@ -6,22 +6,25 @@ import (
 	"image/gif"
 	"image/jpeg"
 	"image/png"
+	"os/user"
 	"log"
 	"os"
 	"path/filepath"
 )
 
 var imageLocation string
+var currentUser *user.User
 
 func init() {
-	imageLocation = "/"
+	currentUser, _ = user.Current()
+	imageLocation = currentUser.HomeDir
 	if len(os.Args) > 1 {
 		imageLocation = os.Args[1]
 	}
 }
 
 func main() {
-	if imageLocation == "/" {
+	if imageLocation == currentUser.HomeDir {
 		formatAllImages()
 	} else {
 		imageformatChoice()
@@ -29,7 +32,7 @@ func main() {
 }
 
 func formatAllImages() {
-	if imageLocation == "/" {
+	if imageLocation == currentUser.HomeDir {
 		filepath.Walk(imageLocation, func(path string, info os.FileInfo, err error) error {
 			switch filepath.Ext(path) {
 			case ".jpeg", ".jpg":
@@ -38,8 +41,6 @@ func formatAllImages() {
 				pngImage(path)
 			case ".gif":
 				gifImage(path)
-			default:
-				fmt.Println("Error: Image format not supported")
 			}
 			return nil
 		})
@@ -54,8 +55,6 @@ func imageformatChoice() {
 		pngImage(imageLocation)
 	case ".gif":
 		gifImage(imageLocation)
-	default:
-		fmt.Println("Error: Image format not supported")
 	}
 }
 
@@ -78,6 +77,7 @@ func jpegImage(imageLocation string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println("Organizing :", imageLocation)
 }
 
 func pngImage(imageLocation string) {
@@ -99,6 +99,7 @@ func pngImage(imageLocation string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println("Organizing :", imageLocation)
 }
 
 func gifImage(imageLocation string) {
@@ -120,4 +121,5 @@ func gifImage(imageLocation string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println("Organizing :", imageLocation)
 }
