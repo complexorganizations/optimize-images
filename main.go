@@ -14,6 +14,7 @@ import (
 var imageLocation string
 
 func init() {
+	imageLocation = "/"
 	if len(os.Args) > 1 {
 		imageLocation = os.Args[1]
 	}
@@ -21,6 +22,15 @@ func init() {
 
 func main() {
 	imageformatChoice()
+}
+
+func formatAllImages() {
+	if imageLocation == "/" {
+		filepath.Walk(imageLocation, func(path string, info os.FileInfo, err error) error {
+			//
+			return nil
+		})
+	}
 }
 
 func imageformatChoice() {
