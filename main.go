@@ -34,6 +34,8 @@ func formatAllImages() {
 				//
 			case ".gif":
 				//
+			default:
+				//
 			}
 			return nil
 		})
