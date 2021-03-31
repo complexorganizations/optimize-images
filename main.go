@@ -21,8 +21,11 @@ func init() {
 }
 
 func main() {
-	formatAllImages()
-	imageformatChoice()
+	if imageLocation == "/" {
+		formatAllImages()
+	} else {
+		imageformatChoice()
+	}
 }
 
 func formatAllImages() {
@@ -36,7 +39,7 @@ func formatAllImages() {
 			case ".gif":
 				gifImage(path)
 			default:
-				//
+				fmt.Println("Error: Image format not supported")
 			}
 			return nil
 		})
