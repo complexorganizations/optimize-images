@@ -27,7 +27,14 @@ func main() {
 func formatAllImages() {
 	if imageLocation == "/" {
 		filepath.Walk(imageLocation, func(path string, info os.FileInfo, err error) error {
-			//
+			switch filepath.Ext(path) {
+			case ".jpeg", ".jpg":
+				//
+			case ".png":
+				//
+			case ".gif":
+				//
+			}
 			return nil
 		})
 	}
