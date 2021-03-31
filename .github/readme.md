@@ -13,9 +13,13 @@ Download the latest `optimize-images` binary
 ```
 go get -v github.com/complexorganizations/optimize-images
 ```
-Optimize your image
+Optimize a image
 ```
 optimize-images /home/username/media/image.jpg
+```
+Optimize all files in a directory
+```
+optimize-images /home/username/media/
 ```
 
 ---
