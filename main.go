@@ -13,7 +13,6 @@ import (
 var imageLocation string
 
 func init() {
-	imageLocation = "example.png"
 	if len(os.Args) > 1 {
 		imageLocation = os.Args[1]
 	}
