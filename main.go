@@ -6,45 +6,42 @@ import (
 	"image/gif"
 	"image/jpeg"
 	"image/png"
-	"os/user"
 	"log"
 	"os"
 	"path/filepath"
 )
 
 var imageLocation string
-var currentUser *user.User
 
 func init() {
-	currentUser, _ = user.Current()
-	imageLocation = currentUser.HomeDir
+	imageLocation = "example.png"
 	if len(os.Args) > 1 {
 		imageLocation = os.Args[1]
 	}
 }
 
 func main() {
-	if imageLocation == currentUser.HomeDir {
-		formatAllImages()
-	} else {
+	if fileExists(imageLocation) {
 		imageformatChoice()
+	} else if folderExists(imageLocation) {
+		formatAllImages()
 	}
 }
 
 func formatAllImages() {
-	if imageLocation == currentUser.HomeDir {
-		filepath.Walk(imageLocation, func(path string, info os.FileInfo, err error) error {
-			switch filepath.Ext(path) {
-			case ".jpeg", ".jpg":
-				jpegImage(path)
-			case ".png":
-				pngImage(path)
-			case ".gif":
-				gifImage(path)
-			}
-			return nil
-		})
-	}
+	filepath.Walk(imageLocation, func(path string, info os.FileInfo, err error) error {
+		switch filepath.Ext(path) {
+		case ".jpeg", ".jpg":
+			jpegImage(path)
+		case ".png":
+			pngImage(path)
+		case ".gif":
+			gifImage(path)
+		default:
+			fmt.Println("Error:", imageLocation)
+		}
+		return nil
+	})
 }
 
 func imageformatChoice() {
@@ -55,6 +52,8 @@ func imageformatChoice() {
 		pngImage(imageLocation)
 	case ".gif":
 		gifImage(imageLocation)
+	default:
+		fmt.Println("Error:", imageLocation)
 	}
 }
 
@@ -77,7 +76,7 @@ func jpegImage(imageLocation string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Organizing :", imageLocation)
+	fmt.Println("Enhancing:", imageLocation)
 }
 
 func pngImage(imageLocation string) {
@@ -99,7 +98,7 @@ func pngImage(imageLocation string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Organizing :", imageLocation)
+	fmt.Println("Enhancing:", imageLocation)
 }
 
 func gifImage(imageLocation string) {
@@ -121,5 +120,21 @@ func gifImage(imageLocation string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Organizing :", imageLocation)
+	fmt.Println("Enhancing:", imageLocation)
+}
+
+func folderExists(foldername string) bool {
+	info, err := os.Stat(foldername)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return info.IsDir()
+}
+
+func fileExists(filename string) bool {
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return !info.IsDir()
 }
