@@ -15,6 +15,8 @@ var imageLocation string
 func init() {
 	if len(os.Args) > 1 {
 		imageLocation = os.Args[1]
+	} else {
+		os.Exit(0)
 	}
 }
 
