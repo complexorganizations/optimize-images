@@ -16,7 +16,7 @@ func init() {
 	if len(os.Args) > 1 {
 		imageLocation = os.Args[1]
 	} else {
-		os.Exit(0)
+		log.Fatal("Error: No argument passed.")
 	}
 }
 
