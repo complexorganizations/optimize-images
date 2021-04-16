@@ -30,13 +30,15 @@ func main() {
 
 func formatAllImages() {
 	filepath.Walk(imageLocation, func(path string, info os.FileInfo, err error) error {
-		switch filepath.Ext(path) {
-		case ".jpeg", ".jpg":
-			jpegImage(path)
-		case ".png":
-			pngImage(path)
-		default:
-			fmt.Println("Error:", imageLocation)
+		if fileExists(path) {
+			switch filepath.Ext(path) {
+			case ".jpeg", ".jpg":
+				jpegImage(path)
+			case ".png":
+				pngImage(path)
+			default:
+				log.Println("Warning:", imageLocation)
+			}
 		}
 		return nil
 	})
@@ -49,7 +51,7 @@ func imageformatChoice() {
 	case ".png":
 		pngImage(imageLocation)
 	default:
-		fmt.Println("Error:", imageLocation)
+		log.Println("Warning:", imageLocation)
 	}
 }
 
