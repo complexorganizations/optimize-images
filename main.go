@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"image/jpeg"
 	"image/png"
@@ -74,7 +73,7 @@ func jpegImage(imageLocation string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Enhancing:", imageLocation)
+	log.Println("Enhancing:", imageLocation)
 }
 
 func pngImage(imageLocation string) {
@@ -96,7 +95,7 @@ func pngImage(imageLocation string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Enhancing:", imageLocation)
+	log.Println("Enhancing:", imageLocation)
 }
 
 func folderExists(foldername string) bool {
